@@ -14,22 +14,20 @@ namespace AtCoder.Abc
             var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false };
             Console.SetOut(sw);
 
-            // 文字列の入力
-            string s = Console.ReadLine();
-
-            // 整数の入力
+            // 山の数の入力
             long n = long.Parse(Console.ReadLine());
 
-            // 文字列配列の入力
-            string[] inputStrArray = Console.ReadLine().Split(' ');
+            var mountainArray = new Dictionary<string, long>();
 
-            // 整数配列の入力
-            var inputLongArray = Console.ReadLine().Split(' ').Select(i => long.Parse(i)).ToArray();
-
-
-
-
-            string result = "";
+            for(int i = 0; i < n; i++)
+            {
+                // 山の情報の入力
+                string[] inputStrArray = Console.ReadLine().Split(' ');
+                mountainArray.Add(inputStrArray[0], int.Parse(inputStrArray[1]));
+            }
+            // 高さで並べ替えて、2番目の名称を出力
+            var sortArray = mountainArray.OrderByDescending(v => v.Value);
+            var result = sortArray.ElementAt(1).Key;
 
             Console.WriteLine(result);
 
