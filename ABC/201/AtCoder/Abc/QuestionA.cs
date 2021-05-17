@@ -11,31 +11,28 @@ namespace AtCoder.Abc
     {
         public static void Main(string[] args)
         {
-            var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false };
-            Console.SetOut(sw);
-
-            // 整数配列の入力
-            var inputLongArray = Console.ReadLine().Split(' ').Select(i => long.Parse(i)).ToArray();
-
-            string result = "";
-            if (inputLongArray[0] == inputLongArray[1] && inputLongArray[1] == inputLongArray[2])
+            try
             {
-                result = "Yes";
-            }
-            else
-            {
+                var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false };
+                Console.SetOut(sw);
+
+                // 整数配列の入力
+                var inputLongArray = Console.ReadLine().Split(' ').Select(i => long.Parse(i)).ToArray();
+
+                if (inputLongArray[0] == inputLongArray[1] && inputLongArray[1] == inputLongArray[2])
+                {
+                    Console.WriteLine("Yes");
+                    return;
+                }
+
                 Array.Sort(inputLongArray);
-                if (inputLongArray[1] - inputLongArray[0] == inputLongArray[2] - inputLongArray[1])
-                {
-                    result = "Yes";
-                }
-                else
-                {
-                    result = "No";
-                }
+                var isYes = (inputLongArray[1] - inputLongArray[0] == inputLongArray[2] - inputLongArray[1]);
+                Console.WriteLine(isYes ? "Yes" : "No");
             }
-            Console.WriteLine(result);
-            Console.Out.Flush();
+            finally
+            {
+                Console.Out.Flush();
+            }
         }
     }
 }
