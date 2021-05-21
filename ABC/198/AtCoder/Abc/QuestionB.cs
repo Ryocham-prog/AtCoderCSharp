@@ -16,18 +16,16 @@ namespace AtCoder.Abc
                 var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false };
                 Console.SetOut(sw);
 
-                // 文字列の入力
-                string s = Console.ReadLine();
+                // 整数の入力
+                long n = long.Parse(Console.ReadLine());
 
-                var len = s.Length;
-                var nStr = new StringBuilder(s);
-                for (int i = 0; i < len; i++)
+                // 末尾の0を削る
+                while(n != 0 && n % 10 == 0)
                 {
-                    if (s.Substring(len - 1 - i, 1) != "0") break;
-                    nStr.Insert(0, "0");
+                    n /= 10;
                 }
 
-                var target = nStr.ToString();
+                var target = n.ToString();
                 var targetLen = target.Length;
                 var loopCnt = targetLen / 2;
                 for (int i = 0; i < loopCnt; i++)
@@ -45,7 +43,6 @@ namespace AtCoder.Abc
             {
                 Console.Out.Flush();
             }
-
         }
     }
 }
