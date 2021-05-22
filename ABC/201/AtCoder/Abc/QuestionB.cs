@@ -40,13 +40,14 @@ namespace AtCoder.Abc
                 // 山の数の入力
                 var n = int.Parse(Console.ReadLine());
 
-                var list = new List<Mountain>();
-                for (int i = 0; i < n; i++)
-                {
-                    // 山の情報の入力
-                    string[] inputStrArray = Console.ReadLine().Split(' ');
-                    list.Add(new Mountain(inputStrArray[0], int.Parse(inputStrArray[1])));
-                }
+                // 情報の入力
+                var inputList = Enumerable.Range(0, n)
+                    .Select(x => Console.ReadLine())
+                    .ToList();
+
+                var list = Enumerable.Range(0, n)
+                    .Select(x => new Mountain(inputList[x].Split(' ')[0], int.Parse(inputList[x].Split(' ')[1])))
+                    .ToList();
 
                 // 高い順に並び替えて、2番目の山の名称を出力
                 list.Sort((a, b) => b.getHeight() - a.getHeight());
