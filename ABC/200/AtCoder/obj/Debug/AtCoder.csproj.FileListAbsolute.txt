@@ -4,3 +4,9 @@ C:\Develop\AtCoder\Program\AtCoderCSharp\ABC\200\AtCoder\bin\Debug\AtCoder.pdb
 C:\Develop\AtCoder\Program\AtCoderCSharp\ABC\200\AtCoder\obj\Debug\AtCoder.csproj.CoreCompileInputs.cache
 C:\Develop\AtCoder\Program\AtCoderCSharp\ABC\200\AtCoder\obj\Debug\AtCoder.exe
 C:\Develop\AtCoder\Program\AtCoderCSharp\ABC\200\AtCoder\obj\Debug\AtCoder.pdb
+D:\Develop\AtCoder\AtCoderCSharp\ABC\200\AtCoder\bin\Debug\AtCoder.exe.config
+D:\Develop\AtCoder\AtCoderCSharp\ABC\200\AtCoder\bin\Debug\AtCoder.exe
+D:\Develop\AtCoder\AtCoderCSharp\ABC\200\AtCoder\bin\Debug\AtCoder.pdb
+D:\Develop\AtCoder\AtCoderCSharp\ABC\200\AtCoder\obj\Debug\AtCoder.csproj.CoreCompileInputs.cache
+D:\Develop\AtCoder\AtCoderCSharp\ABC\200\AtCoder\obj\Debug\AtCoder.exe
+D:\Develop\AtCoder\AtCoderCSharp\ABC\200\AtCoder\obj\Debug\AtCoder.pdb

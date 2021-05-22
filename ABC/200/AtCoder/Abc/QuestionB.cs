@@ -30,8 +30,7 @@ namespace AtCoder.Abc
                     }
                     else
                     {
-                        var tmp = n.ToString() + "200";
-                        n = long.Parse(tmp);
+                        n = n * 1000 + 200;
                     }
                 }
 
