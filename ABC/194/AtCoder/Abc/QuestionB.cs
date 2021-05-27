@@ -6,33 +6,99 @@ using System.Threading.Tasks;
 
 namespace AtCoder.Abc
 {
+    // https://atcoder.jp/contests/abc194/tasks/abc194_b
     class QuestionB
     {
+        class Employees
+        {
+            private int _aMinutes;
+            private int _bMinutes;
+            private int _number;
+
+            public Employees(int a, int b, int num)
+            {
+                this._aMinutes = a;
+                this._bMinutes = b;
+                this._number = num;
+            }
+
+            public int getMinutesA()
+            {
+                return _aMinutes;
+            }
+            public int getMinutesB()
+            {
+                return _bMinutes;
+            }
+            public int getNumber()
+            {
+                return _number;
+            }
+        }
+
         public static void Main(string[] args)
         {
-            var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false };
-            Console.SetOut(sw);
+            using (var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false })
+            {
+                Console.SetOut(sw);
 
-            // 文字列の入力
-            string s = Console.ReadLine();
+                // 従業員数(N)の入力
+                var n = int.Parse(Console.ReadLine());
 
-            // 整数の入力
-            long n = long.Parse(Console.ReadLine());
+                // 従業員の仕事A,Bにおける所要時間の入力
+                var stringList = Enumerable.Range(0, n).Select(x => Console.ReadLine()).ToList();
 
-            // 文字列配列の入力
-            string[] inputStrArray = Console.ReadLine().Split(' ');
+                var employeesList = new List<Employees>();
+                var i = 0;
+                foreach (var employee in stringList)
+                {
+                    employeesList.Add(new Employees(int.Parse(employee.Split(' ')[0]), int.Parse(employee.Split(' ')[1]), i));
+                    i++;
+                }
 
-            // 整数配列の入力
-            var inputLongArray = Console.ReadLine().Split(' ').Select(i => long.Parse(i)).ToArray();
+                var listOrderByA = new List<Employees>(employeesList.OrderBy(a => a.getMinutesA()));
+                var listOrderByB = new List<Employees>(employeesList.OrderBy(b => b.getMinutesB()));
 
+                var aMin = listOrderByA.ElementAt(0).getMinutesA();
+                var bMin = listOrderByB.ElementAt(0).getMinutesB();
 
+                // 仕事A,B の最速が同じ人の場合
+                if (listOrderByA.ElementAt(0).getNumber() == listOrderByB.ElementAt(0).getNumber())
+                {
+                    var aSecond = listOrderByA.ElementAt(1).getMinutesA();
+                    var bSecond = listOrderByB.ElementAt(1).getMinutesB();
 
+                    // 仕事Aを最速の人がやる場合
+                    var FastA = Math.Max(aMin, bSecond);
 
-            string result = "";
+                    // 仕事Bを最速の人がやる場合
+                    var FastB = Math.Max(aSecond, bMin);
 
-            Console.WriteLine(result);
+                    // 仕事A,B両方を最速の人がやる場合
+                    var bothAB = aMin + bMin;
 
-            Console.Out.Flush();
+                    // 一番短い時間を求める
+                    var min = 0;
+                    if (FastA < FastB)
+                    {
+                        min = FastA;
+                    }
+                    else
+                    {
+                        min = FastB;
+                    }
+
+                    if (bothAB < min) min = bothAB;
+
+                    Console.WriteLine(min);
+                }
+                // 仕事A,B の最速が別人の場合
+                else
+                {
+                    Console.WriteLine(Math.Max(aMin, bMin));
+                }
+                Console.Out.Flush();
+            }
         }
     }
 }
