@@ -6,33 +6,33 @@ using System.Threading.Tasks;
 
 namespace AtCoder.Abc
 {
+    // https://atcoder.jp/contests/abc193/tasks/abc193_b
     class QuestionB
     {
         public static void Main(string[] args)
         {
-            var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false };
-            Console.SetOut(sw);
+            using (var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()))
+            {
+                Console.SetOut(sw);
 
-            // 文字列の入力
-            string s = Console.ReadLine();
+                // 販売店舗数の入力
+                var n = int.Parse(Console.ReadLine());
 
-            // 整数の入力
-            long n = long.Parse(Console.ReadLine());
+                // 店舗情報(A,P,X)の入力
+                var shopList = Enumerable.Range(0, n)
+                    .Select(input => new { input = Console.ReadLine().Split(' ') })
+                    .Select(x => new { time = long.Parse(x.input[0]), price = long.Parse(x.input[1]), stock = long.Parse(x.input[2]) }).ToList();
 
-            // 文字列配列の入力
-            string[] inputStrArray = Console.ReadLine().Split(' ');
+                var ableShop = shopList.Where(x => (x.stock - x.time) >= 1).OrderBy(x => x.price).ToList();
 
-            // 整数配列の入力
-            var inputLongArray = Console.ReadLine().Split(' ').Select(i => long.Parse(i)).ToArray();
-
-
-
-
-            string result = "";
-
-            Console.WriteLine(result);
-
-            Console.Out.Flush();
+                if(ableShop.Count == 0)
+                {
+                    Console.WriteLine("-1");
+                    return;
+                }
+                Console.WriteLine(ableShop.ElementAt(0).price);
+                Console.Out.Flush();
+            }
         }
     }
 }
