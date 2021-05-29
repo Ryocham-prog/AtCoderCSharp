@@ -43,15 +43,12 @@ namespace AtCoder.Abc
                 // 情報の入力
                 var inputList = Enumerable.Range(0, n)
                     .Select(x => Console.ReadLine())
-                    .ToList();
-
-                var list = Enumerable.Range(0, n)
-                    .Select(x => new Mountain(inputList[x].Split(' ')[0], int.Parse(inputList[x].Split(' ')[1])))
+                    .Select(x => new Mountain(x.Split(' ')[0], int.Parse(x.Split(' ')[1])))
                     .ToList();
 
                 // 高い順に並び替えて、2番目の山の名称を出力
-                list.Sort((a, b) => b.getHeight() - a.getHeight());
-                Console.WriteLine(list[1].getName());
+                var secondMountain = inputList.OrderByDescending(x => x.getHeight()).ElementAt(1).getName();
+                Console.WriteLine(secondMountain);
             }
             finally
             {
