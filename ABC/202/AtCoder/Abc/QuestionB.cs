@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AtCoder.Abc
 {
+    // https://atcoder.jp/contests/abc202/tasks/abc202_b
     class QuestionB
     {
         public static void Main(string[] args)
@@ -17,29 +18,21 @@ namespace AtCoder.Abc
                 // 文字列Sの入力
                 var inputArray = Console.ReadLine().ToArray();
 
-                if (inputArray.Length == 0) return;
+                if (inputArray.Length == 0)
+                {
+                    Console.Error.WriteLine("0,1,6,8,9 からなる文字列を入力してください。");
+                    return;
+                }
 
-                var qb = new QuestionB();
-                var result = inputArray.Select(input => input = qb.ReplaceStr(input)).Reverse().ToArray();
+                var result = inputArray
+                    .Select(input => input = input == '6' ? 'X' : input)
+                    .Select(input => input = input == '9' ? '6' : input)
+                    .Select(input => input = input == 'X' ? '9' : input)
+                    .Reverse().ToArray();
                 Console.WriteLine(String.Join("", result));
 
                 Console.Out.Flush();
             }
-        }
-
-        public char ReplaceStr(char target)
-        {
-            if(target == '6')
-            {
-                return '9';
-            }
-
-            if (target == '9')
-            {
-                return '6';
-            }
-
-            return target;
         }
     }
 }
