@@ -25,9 +25,7 @@ namespace AtCoder.Abc
                 }
 
                 var result = inputArray
-                    .Select(input => input = input == '6' ? 'X' : input)
-                    .Select(input => input = input == '9' ? '6' : input)
-                    .Select(input => input = input == 'X' ? '9' : input)
+                    .Select(input => input == '6' ? '9' : input == '9' ? '6' : input)
                     .Reverse().ToArray();
                 Console.WriteLine(String.Join("", result));
 
