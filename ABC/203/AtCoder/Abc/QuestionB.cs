@@ -20,6 +20,7 @@ namespace AtCoder.Abc
                 if(inputArray.Length != 2)
                 {
                     Console.Error.WriteLine("入力値を確認してください。(入力形式：\"N K\")");
+                    return;
                 }
 
                 var floorInput = inputArray[0];
