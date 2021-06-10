@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AtCoder.Abc
 {
+    // https://atcoder.jp/contests/abc186/tasks/abc186_b
     class QuestionB
     {
         public static void Main(string[] args)
@@ -25,8 +26,8 @@ namespace AtCoder.Abc
                 // 各行のブロック数を入力
                 var blockInfo = Enumerable.Range(1, inputArray[0])
                     .Select(input => Console.ReadLine())
-                    .Select(input => new { blockCount = input.Split(' ').Select(i => int.Parse(i)) })
-                    .SelectMany(input => input.blockCount)
+                    .Select(input => input.Split(' ').Select(i => int.Parse(i)))
+                    .SelectMany(input => input)
                     .ToArray();
 
                 var minBlockCount = blockInfo.Min();

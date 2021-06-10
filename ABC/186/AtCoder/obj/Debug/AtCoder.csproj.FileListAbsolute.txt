@@ -4,3 +4,4 @@ D:\Develop\AtCoder\AtCoderCSharp\ABC\186\AtCoder\bin\Debug\AtCoder.pdb
 D:\Develop\AtCoder\AtCoderCSharp\ABC\186\AtCoder\obj\Debug\AtCoder.csproj.CoreCompileInputs.cache
 D:\Develop\AtCoder\AtCoderCSharp\ABC\186\AtCoder\obj\Debug\AtCoder.exe
 D:\Develop\AtCoder\AtCoderCSharp\ABC\186\AtCoder\obj\Debug\AtCoder.pdb
+D:\Develop\AtCoder\AtCoderCSharp\ABC\186\AtCoder\obj\Debug\AtCoder.csprojAssemblyReference.cache
