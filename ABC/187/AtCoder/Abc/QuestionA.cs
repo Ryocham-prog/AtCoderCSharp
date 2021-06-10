@@ -31,7 +31,7 @@ namespace AtCoder.Abc
                     .Select(x => int.Parse(x.ToString()))
                     .Sum();
 
-                var result = Math.Max(sumA, sumB) == sumA ? sumA : sumB;
+                var result = Math.Max(sumA, sumB);
                 Console.WriteLine(result.ToString());
 
                 Console.Out.Flush();
