@@ -25,8 +25,8 @@ namespace AtCoder
 
         private static void Exec(string[] args)
         {
-            QuestionA.Main(args);
-            //QuestionB.Main(args);
+            //QuestionA.Main(args);
+            QuestionB.Main(args);
         }
 
         public class Debug

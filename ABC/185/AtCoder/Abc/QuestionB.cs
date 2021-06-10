@@ -9,31 +9,80 @@ namespace AtCoder.Abc
     // https://atcoder.jp/contests/abc185/tasks/abc185_b
     class QuestionB
     {
+        class CafeTime
+        {
+            private int _enterTime;
+            private int _leaveTime;
+
+            public CafeTime(int enterTime, int leaveTime)
+            {
+                this._enterTime = enterTime;
+                this._leaveTime = leaveTime;
+            }
+
+            public int GetEnterTime()
+            {
+                return _enterTime;
+            }
+
+            public int GetLeaveTime()
+            {
+                return _leaveTime;
+            }
+        }
+
         public static void Main(string[] args)
         {
-            var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false };
-            Console.SetOut(sw);
+            using (var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()))
+            {
 
-            // 文字列の入力
-            string s = Console.ReadLine();
+                Console.SetOut(sw);
 
-            // 整数の入力
-            long n = long.Parse(Console.ReadLine());
+                // N:バッテリー容量, M:カフェの訪問回数, T:帰宅時刻の入力
+                var inputArray = Console.ReadLine().Split(' ').Select(i => int.Parse(i)).ToArray();
+                if (inputArray.Length != 3)
+                {
+                    Console.Error.WriteLine("入力値を確認してください。(入力形式：\"N M T\")");
+                    return;
+                }
 
-            // 文字列配列の入力
-            string[] inputStrArray = Console.ReadLine().Split(' ');
+                var n = inputArray[0];
+                var m = inputArray[1];
+                var t = inputArray[2];
 
-            // 整数配列の入力
-            var inputLongArray = Console.ReadLine().Split(' ').Select(i => long.Parse(i)).ToArray();
+                // A:カフェ入室時間, B:カフェ退室時間の入力
+                var cafeTimeList = Enumerable.Range(1, m)
+                    .Select(x => Console.ReadLine())
+                    .Select(x => new CafeTime(int.Parse(x.Split(' ')[0]), int.Parse(x.Split(' ')[1])))
+                    .ToList();
 
+                var battery = n;
+                var leaveTime = 0;
+                foreach (var cafeTime in cafeTimeList)
+                {
+                    var enterTime = cafeTime.GetEnterTime();
+                    // カフェに着くまでのバッテリー残量をチェック
+                    battery -= enterTime - leaveTime;
+                    if (battery < 1)
+                    {
+                        Console.WriteLine("No");
+                        return;
+                    }
 
+                    // カフェにいる間の充電ぶんを加算
+                    leaveTime = cafeTime.GetLeaveTime();
+                    battery += leaveTime - enterTime;
+                    if (battery > n) battery = n;
+                }
 
+                // 最後のカフェから帰宅までのバッテリー消費ぶんを減算
+                battery -= t - leaveTime;
 
-            string result = "";
+                var result = battery < 1 ? "No" : "Yes";
+                Console.WriteLine(result);
 
-            Console.WriteLine(result);
-
-            Console.Out.Flush();
+                Console.Out.Flush();
+            }
         }
     }
 }
