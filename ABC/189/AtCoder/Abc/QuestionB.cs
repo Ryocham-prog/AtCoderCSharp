@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AtCoder.Abc
 {
+    // https://atcoder.jp/contests/abc189/tasks/abc189_b
     class QuestionB
     {
         public static void Main(string[] args)
@@ -16,7 +17,7 @@ namespace AtCoder.Abc
 
                 // N:飲んだお酒の総数, X:酔っぱらうアルコール摂取量の入力
                 var inputArray = Console.ReadLine().Split(' ').Select(i => int.Parse(i)).ToArray();
-                if(inputArray.Length !=2)
+                if (inputArray.Length != 2)
                 {
                     Console.Error.WriteLine("入力値を確認してください。(入力形式：\"N X\")");
                     return;
@@ -28,20 +29,22 @@ namespace AtCoder.Abc
                 // 飲んだお酒の情報(V:お酒の量, P:アルコール度数(%))の入力
                 var alcoholInfoArray = Enumerable.Range(1, n)
                     .Select(input => Console.ReadLine())
-                    .Select((input, index) => new { v = int.Parse(input.Split(' ')[0]), p = int.Parse(input.Split(' ')[1]), index }).ToArray();
+                    .Select((input, index) => new { alcohol = int.Parse(input.Split(' ')[0]) * int.Parse(input.Split(' ')[1]), index })
+                    .ToArray();
 
-                var alcoholSum = 0;
-                foreach(var info in alcoholInfoArray)
-                {
-                    alcoholSum += info.v * info.p;
-                    if(alcoholSum > x)
+                var result = alcoholInfoArray
+                    .Aggregate(new { alcohol = 0, index = 0 }, (sum, next) =>
                     {
-                        Console.WriteLine((info.index + 1).ToString());
-                        return;
-                    }
-                }
-
-                Console.WriteLine("-1");
+                        var tmp = sum.alcohol;
+                        if (tmp > x)
+                        {
+                            return sum;
+                        }
+                        tmp += next.alcohol;
+                        return new { alcohol = tmp, index = next.index };
+                    });
+                var output = result.alcohol <= x ? "-1" : (result.index + 1).ToString();
+                Console.WriteLine(output);
                 Console.Out.Flush();
             }
         }
