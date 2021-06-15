@@ -14,20 +14,16 @@ namespace AtCoder.Abc
             private int _enterTime;
             private int _leaveTime;
 
-            public CafeTime(int enterTime, int leaveTime)
+            public int EnterTime
             {
-                this._enterTime = enterTime;
-                this._leaveTime = leaveTime;
+                set{ this._enterTime = value;}
+                get{ return this._enterTime; }
             }
 
-            public int GetEnterTime()
+            public int LeaveTime
             {
-                return _enterTime;
-            }
-
-            public int GetLeaveTime()
-            {
-                return _leaveTime;
+                set { this._leaveTime = value; }
+                get { return this._leaveTime; }
             }
         }
 
@@ -53,27 +49,27 @@ namespace AtCoder.Abc
                 // A:カフェ入室時間, B:カフェ退室時間の入力
                 var cafeTimeList = Enumerable.Range(1, m)
                     .Select(x => Console.ReadLine())
-                    .Select(x => new CafeTime(int.Parse(x.Split(' ')[0]), int.Parse(x.Split(' ')[1])))
+                    .Select(x => new CafeTime { EnterTime = int.Parse(x.Split(' ')[0]), LeaveTime = int.Parse(x.Split(' ')[1])})
                     .ToList();
 
                 var battery = n;
                 var leaveTime = 0;
-                foreach (var cafeTime in cafeTimeList)
+                var check = cafeTimeList.Aggregate(0, (sum, next) =>
                 {
-                    var enterTime = cafeTime.GetEnterTime();
+                    var enterTime = next.EnterTime;
                     // カフェに着くまでのバッテリー残量をチェック
                     battery -= enterTime - leaveTime;
                     if (battery < 1)
                     {
-                        Console.WriteLine("No");
-                        return;
+                        return 0;
                     }
 
                     // カフェにいる間の充電ぶんを加算
-                    leaveTime = cafeTime.GetLeaveTime();
+                    leaveTime = next.LeaveTime;
                     battery += leaveTime - enterTime;
                     if (battery > n) battery = n;
-                }
+                    return battery;
+                });
 
                 // 最後のカフェから帰宅までのバッテリー消費ぶんを減算
                 battery -= t - leaveTime;
