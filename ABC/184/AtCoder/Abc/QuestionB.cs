@@ -28,12 +28,7 @@ namespace AtCoder.Abc
 
                 // クイズ結果
                 var quizResult = Console.ReadLine().ToArray();
-
-                var point = x;
-                foreach(var result in quizResult)
-                {
-                    point = (result == 'o') ? point + 1 : (point != 0) ? point - 1 : 0;
-                }
+                var point = quizResult.Aggregate(x, (sum, next) => next == 'o' ? sum + 1 : sum == 0 ? 0 : sum - 1);
                 Console.WriteLine(point.ToString());
 
                 Console.Out.Flush();
