@@ -27,7 +27,7 @@ namespace AtCoder.Abc
                 }
 
                 Console.WriteLine(inputArray.Select(x => Math.Abs(x)).Sum());
-                Console.WriteLine(Math.Sqrt(inputArray.Select(x => Math.Abs(x) * Math.Abs(x)).Sum()));
+                Console.WriteLine(Math.Sqrt(inputArray.Select(x => Math.Pow(Math.Abs(x), 2)).Sum()));
                 Console.WriteLine(inputArray.Select(x => Math.Abs(x)).Max());
 
                 Console.Out.Flush();
