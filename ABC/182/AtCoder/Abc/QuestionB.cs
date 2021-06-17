@@ -26,19 +26,19 @@ namespace AtCoder.Abc
                     return;
                 }
 
-                var numArray = Enumerable.Range(2, inputArray.Max() - 1).ToArray();
-                var gcdMax = 0;
-                var result = 0;
-                foreach (var num in numArray)
-                {
-                    var gcdArray = inputArray.Where(x => x % num == 0);
-                    if (gcdMax <= gcdArray.Count())
+                var result = Enumerable.Range(2, inputArray.Max() - 1)
+                    .Select(x => new { num = x, gcd = 0 })
+                    .Aggregate(new { num = 0, gcd = 0 }, (maxGCD, next) =>
                     {
-                        gcdMax = gcdArray.Count();
-                        result = num;
-                    }
-                }
-                Console.WriteLine(result.ToString());
+                        var gcdArray = inputArray.Where(x => x % next.num == 0);
+                        if (maxGCD.gcd <= gcdArray.Count())
+                        {
+                            return new { num = next.num, gcd = gcdArray.Count() };
+                        }
+                        return maxGCD;
+                    });
+
+                Console.WriteLine(result.num.ToString());
 
                 Console.Out.Flush();
             }
