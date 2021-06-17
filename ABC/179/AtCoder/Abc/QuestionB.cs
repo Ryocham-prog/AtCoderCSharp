@@ -20,29 +20,30 @@ namespace AtCoder.Abc
 
                 // 二つのサイコロの目の入力
                 var inputArray = Enumerable.Range(1, n)
-                    .Select(x => Console.ReadLine().Split(' '))
-                    .Select((input, index) => new { input, index });
-
-                var sameIndexList = inputArray
-                    .Where(x => x.input[0] == x.input[1])
-                    .Select(x => x.index)
-                    .ToArray();
-
-                var beforeValue = 99;
-                var result = sameIndexList.Aggregate(0, (count, next) =>
-                {
-                    var tmp = count;
-                    if (tmp == 3)
+                    .Select((x, index) =>
                     {
-                        return count;
-                    }
+                        var input = Console.ReadLine().Split(' ');
+                        return new { input, index };
+                    })
+                                        .Where(x => x.input[0] == x.input[1])
+                                        .ToArray();
 
-                    count = beforeValue + 1 != next ? 1 : count + 1;
-                    beforeValue = next;
-                    return count;
-                });
+                var result = inputArray
+                    .Aggregate(new { count = 0, beforeindex = 99 }, (sameSeqData, next) =>
+                    {
 
-                var output = result == 3 ? "Yes" : "No";
+                        var tmp = sameSeqData.count;
+                        if (tmp == 3)
+                        {
+                            return sameSeqData;
+                        }
+
+                        tmp = ((sameSeqData.beforeindex + 1) != next.index) ? 1 : (tmp + 1);
+                        return new { count = tmp, beforeindex = next.index };
+
+                    });
+
+                var output = result.count == 3 ? "Yes" : "No";
                 Console.WriteLine(output);
 
                 Console.Out.Flush();
