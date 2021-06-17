@@ -11,18 +11,13 @@ namespace AtCoder.Abc
     {
         class NumRange
         {
-            private long _startNum;
-            private long _endNum;
+            public long StartNum { get; }
+            public long EndNum { get; }
 
-            public long StartNum
+            public NumRange(long startNum, long endNum)
             {
-                set { this._startNum = value; }
-                get { return this._startNum; }
-            }
-            public long EndNum
-            {
-                set { this._endNum = value; }
-                get { return this._endNum; }
+                StartNum = startNum;
+                EndNum = endNum;
             }
         }
 
@@ -37,7 +32,7 @@ namespace AtCoder.Abc
 
                 var inputArray = Enumerable.Range(1, n)
                     .Select(x => Console.ReadLine())
-                    .Select(x => new NumRange { StartNum = long.Parse(x.Split(' ')[0]), EndNum = long.Parse(x.Split(' ')[1]) })
+                    .Select(x => new NumRange (long.Parse(x.Split(' ')[0]), long.Parse(x.Split(' ')[1])))
                     .ToArray();
 
                 var result = inputArray
