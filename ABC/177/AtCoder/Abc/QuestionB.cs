@@ -21,15 +21,12 @@ namespace AtCoder.Abc
 
                 var checkCount = s.Length - t.Length + 1;
                 var minDiff = Enumerable.Range(1, checkCount)
-                    .Select((x, index) => new { x, index })
-                    .Select(x => s.Substring(x.index, t.Length))
+                    .Select((x, index) => s.Substring(index, t.Length))
                     .Aggregate(9999, (min, next) =>
                     {
-                        var diff = 0;
-                        for (var i = 0; i < t.Length; i++)
-                        {
-                            if (next.Substring(i, 1) != t.Substring(i, 1)) diff++;
-                        }
+                        var diff = t.ToArray()
+                        .Where((x, idx) => next.Substring(idx, 1) != t.Substring(idx, 1))
+                        .Count();
 
                         return Math.Min(min, diff);
                     });
