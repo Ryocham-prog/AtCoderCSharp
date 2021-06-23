@@ -11,29 +11,50 @@ namespace AtCoder.Abc
     {
         public static void Main(string[] args)
         {
-            var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false };
-            Console.SetOut(sw);
+            using (var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()))
+            {
+                Console.SetOut(sw);
 
-            // 文字列の入力
-            string s = Console.ReadLine();
+                // N: 棒の本数の入力
+                var n = int.Parse(Console.ReadLine());
 
-            // 整数の入力
-            long n = long.Parse(Console.ReadLine());
+                // 整数配列の入力
+                var inputArray = Console.ReadLine().Split(' ').Select(i => int.Parse(i)).ToArray();
+                if (inputArray.Length != n)
+                {
+                    Console.Error.WriteLine("入力値を確認してください。(入力形式：\"L1 L2 … Ln\")");
+                    return;
+                }
 
-            // 文字列配列の入力
-            string[] inputStrArray = Console.ReadLine().Split(' ');
+                if (n < 3)
+                {
+                    Console.WriteLine("0");
+                    return;
+                }
 
-            // 整数配列の入力
-            var inputLongArray = Console.ReadLine().Split(' ').Select(i => long.Parse(i)).ToArray();
+                var groupList = inputArray.GroupBy(x => x)
+                    .Select(x => new { val = x.Key, count = x.Count() })
+                    .OrderBy(x => x.val).ToArray();
 
+                var totalCount = groupList.SelectMany((x, idx) =>
+                groupList.Skip(idx + 1).SelectMany((y, idx2) =>
+                groupList.Skip(idx + 1).Skip(idx2 + 1).Select(z => new { x, y, z })))
+                    .Aggregate(0, (result, next) => {
+                        var tmp = result;
 
+                        var first = next.x.val;
+                        var second = next.y.val;
+                        var third = next.z.val;
 
+                        if (first + second > third) tmp += next.x.count * next.y.count * next.z.count;
+                        return tmp;
+                    });
 
-            string result = "";
-
-            Console.WriteLine(result);
-
-            Console.Out.Flush();
+                Console.WriteLine(totalCount.ToString());
+                Console.Out.Flush();
+            }
         }
     }
 }
+
+
