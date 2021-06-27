@@ -22,8 +22,7 @@ namespace AtCoder.Abc
                 var resultList = Enumerable.Range(1, n)
                     .Select(x => Console.ReadLine())
                     .GroupBy(x => x)
-                    .Select(x => new { val = x.Key, count = x.Count() })
-                    .ToDictionary(x => x.val, x => x.count);
+                    .ToDictionary(x => x.Key, x => x.Count());
 
                 var acResult = resultList.ContainsKey("AC") ? resultList["AC"] : 0;
                 Console.WriteLine("AC x " + acResult);
