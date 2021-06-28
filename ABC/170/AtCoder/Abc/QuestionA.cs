@@ -22,7 +22,7 @@ namespace AtCoder.Abc
                 var result = inputArray
                     .Select((x, index) => new { val = x, index })
                     .Aggregate(0, (output, next) => {
-                        if (next.val != expectArray[next.index]) return output = expectArray[next.index];
+                        if (next.val != expectArray[next.index]) return expectArray[next.index];
 
                         return output;
                     });
