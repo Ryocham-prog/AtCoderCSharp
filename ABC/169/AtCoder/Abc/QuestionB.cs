@@ -9,7 +9,7 @@ namespace AtCoder.Abc
     // https://atcoder.jp/contests/abc169/tasks/abc169_b
     class QuestionB
     {
-        const long maxVal = 1000000000000000000;
+        static readonly long maxVal = 1_000_000_000_000_000_000;
         public static void Main(string[] args)
         {
             using (var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()))
@@ -33,9 +33,7 @@ namespace AtCoder.Abc
                     var tmp = pro;
                     if (tmp == -1) return tmp;
 
-                    tmp = tmp > maxVal / next ? -1 : tmp * next;
-
-                    return tmp;
+                    return tmp > maxVal / next ? -1 : tmp * next;
                 });
                 Console.WriteLine(result.ToString());
 
