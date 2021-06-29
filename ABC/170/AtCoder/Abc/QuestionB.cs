@@ -27,17 +27,15 @@ namespace AtCoder.Abc
                 var result = headArray
                     .Aggregate(false, (judge, next) =>
                     {
-                        var tmp = judge;
-                        if (tmp == true) return tmp;
+                        if (judge) return true;
 
                         var cr = next.crane;
                         var tu = next.turtle;
-                        if (2 * cr + 4 * tu == y) return true;
 
-                        return judge;
+                        return (2 * cr + 4 * tu == y);
                     });
 
-                var outStr = result == true ? "Yes" : "No";
+                var outStr = result ? "Yes" : "No";
 
                 Console.WriteLine(outStr);
 
