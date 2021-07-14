@@ -19,7 +19,7 @@ namespace AtCoder.Abc
                 var n = int.Parse(Console.ReadLine());
 
                 var q = new QuestionB();
-                var output = q.Add(n, 0, 1);
+                var output = q.calcSavings(n, 0, 1);
 
                 Console.WriteLine(output);
 
@@ -27,13 +27,11 @@ namespace AtCoder.Abc
             }
         }
 
-        private int Add(int n, int savings, int days)
+        private int calcSavings(int n, int savings, int days)
         {
             if (savings >= n) return days - 1;
 
-            savings += days;
-            days++;
-            var result = Add(n, savings, days);
+            var result = calcSavings(n, savings + days, days + 1);
 
             return result;
         }
