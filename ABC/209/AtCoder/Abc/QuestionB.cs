@@ -29,7 +29,8 @@ namespace AtCoder.Abc
                 var totalAmount = Console.ReadLine().Split(' ')
                     .Select((i, index) =>
                     {
-                        return (index + 1) % 2 == 0 ? int.Parse(i) - 1 : int.Parse(i);
+                        var tmp = int.Parse(i);
+                        return (index + 1) % 2 == 0 ? tmp - 1 : tmp;
                     })
                     .Sum();
 
