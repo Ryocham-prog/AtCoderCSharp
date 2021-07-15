@@ -11,29 +11,89 @@ namespace AtCoder.Abc
     {
         public static void Main(string[] args)
         {
-            var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false };
-            Console.SetOut(sw);
+            using (var sw = new System.IO.StreamWriter(Console.OpenStandardOutput()))
+            {
+                Console.SetOut(sw);
 
-            // 文字列の入力
-            string s = Console.ReadLine();
-
-            // 整数の入力
-            long n = long.Parse(Console.ReadLine());
-
-            // 文字列配列の入力
-            string[] inputStrArray = Console.ReadLine().Split(' ');
-
-            // 整数配列の入力
-            var inputLongArray = Console.ReadLine().Split(' ').Select(i => long.Parse(i)).ToArray();
-
+                // ビンゴのカード情報の入力
+                var bingoArray = Enumerable.Range(1, 3)
+                    .Select(x => Console.ReadLine())
+                    .Select(x =>
+                    {
+                        var tmp = x.Split(' ').Select(y => int.Parse(y)).ToArray();
+                        return tmp;
+                    })
+                    .ToArray();
 
 
+                // 選ぶ数字の入力
+                var n = int.Parse(Console.ReadLine());
 
-            string result = "";
+                var inputArray = Enumerable.Range(1, n)
+                    .Select(x => int.Parse(Console.ReadLine()))
+                    .ToArray();
 
-            Console.WriteLine(result);
+                var flgArray = new int[][] {
+                    new int[]{ 0,0,0 },
+                    new int[]{ 0,0,0 },
+                    new int[]{ 0,0,0 }
+                };
 
-            Console.Out.Flush();
+                for (var i = 0; i < 3; i++)
+                {
+                    for (var j = 0; j < 3; j++)
+                    {
+                        if (inputArray.Contains(bingoArray[i][j])) flgArray[i][j] = 1;
+                    }
+                }
+
+                // 横方向のチェック
+                var rowCheck = flgArray.Aggregate(false, (rowResult, next) =>
+                {
+                    if (rowResult) return true;
+                    var tmp = next.Where(x => x == 1).Count();
+                    return (tmp == 3);
+                });
+
+                if (rowCheck)
+                {
+                    Console.WriteLine("Yes");
+                    return;
+                }
+
+                // 縦方向のチェック
+                for (var i = 0; i < 3; i++)
+                {
+                    var colCheck = true;
+                    for (var j = 0; j < 3; j++)
+                    {
+                        if (!colCheck) break;
+                        if (flgArray[j][i] == 0 ) colCheck = false;
+                    }
+                    if (colCheck)
+                    {
+                        Console.WriteLine("Yes");
+                        return;
+                    }
+                }
+
+                // ナナメのチェック
+                if (flgArray[0][0] == 1 && flgArray[1][1] == 1 && flgArray[2][2] == 1)
+                {
+                    Console.WriteLine("Yes");
+                    return;
+                }
+
+                if (flgArray[0][2] == 1 && flgArray[1][1] == 1 && flgArray[2][0] == 1)
+                {
+                    Console.WriteLine("Yes");
+                    return;
+                }
+
+                Console.WriteLine("No");
+
+                Console.Out.Flush();
+            }
         }
     }
 }
