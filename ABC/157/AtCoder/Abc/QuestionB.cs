@@ -25,27 +25,19 @@ namespace AtCoder.Abc
                     })
                     .ToArray();
 
-
                 // 選ぶ数字の入力
-                var n = int.Parse(Console.ReadLine());
+                Int32.TryParse(Console.ReadLine(), out int n);
 
                 var inputArray = Enumerable.Range(1, n)
                     .Select(x => int.Parse(Console.ReadLine()))
                     .ToArray();
 
-                var flgArray = new int[][] {
-                    new int[]{ 0,0,0 },
-                    new int[]{ 0,0,0 },
-                    new int[]{ 0,0,0 }
-                };
-
-                for (var i = 0; i < 3; i++)
-                {
-                    for (var j = 0; j < 3; j++)
-                    {
-                        if (inputArray.Contains(bingoArray[i][j])) flgArray[i][j] = 1;
-                    }
-                }
+                var flgArray = bingoArray
+                    .Select(arr => {
+                        var tmp = arr.Select(input => inputArray.Contains(input) ? 1 : 0).ToArray();
+                        return tmp;
+                    })
+                    .ToArray();
 
                 // 横方向のチェック
                 var rowCheck = flgArray.Aggregate(false, (rowResult, next) =>
