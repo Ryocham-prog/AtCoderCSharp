@@ -16,7 +16,10 @@ namespace AtCoder.Abc
                 Console.SetOut(sw);
 
                 // 整数配列の入力
-                var inputArray = Console.ReadLine().Split(' ').Select(i => int.Parse(i)).ToArray();
+                var inputArray = Console.ReadLine().Split(' ').Select(i => {
+                    Int32.TryParse(i, out int tmpParse);
+                    return tmpParse;
+                }).ToArray();
                 var tmp = inputArray.Sum() ;
                 var result = tmp < 22 ? "win" : "bust";
 
