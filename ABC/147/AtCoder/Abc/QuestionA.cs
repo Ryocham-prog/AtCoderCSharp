@@ -17,10 +17,17 @@ namespace AtCoder.Abc
 
                 // 整数配列の入力
                 var inputArray = Console.ReadLine().Split(' ').Select(i => {
-                    Int32.TryParse(i, out int tmpParse);
-                    return tmpParse;
+                    var success = Int32.TryParse(i, out int tmpVal);
+                    return new { success, val = tmpVal };
                 }).ToArray();
-                var tmp = inputArray.Sum() ;
+
+                if (inputArray.Where(x => !(x.success)).Count() > 0)
+                {
+                    Console.Error.WriteLine("入力値を確認してください。(入力形式：\"1 <= Ai <= 13  (i = 1, 2, 3)\")");
+                    return;
+                }
+
+                var tmp = inputArray.Select(x => x.val).Sum() ;
                 var result = tmp < 22 ? "win" : "bust";
 
                 Console.WriteLine(result);
