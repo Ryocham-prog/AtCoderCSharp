@@ -27,7 +27,7 @@ namespace AtCoder.Abc
                     return;
                 }
 
-                var tmp = inputArray.Select(x => x.val).Sum() ;
+                var tmp = inputArray.Where(x => x.success).Select(x => x.val).Sum() ;
                 var result = tmp < 22 ? "win" : "bust";
 
                 Console.WriteLine(result);
