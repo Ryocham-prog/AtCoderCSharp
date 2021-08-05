@@ -16,8 +16,7 @@ namespace AtCoder.Abc
                 Console.SetOut(sw);
 
                 // 整数の入力
-                var success = Int32.TryParse(Console.ReadLine(), out int n);
-                if(!success)
+                if(!Int32.TryParse(Console.ReadLine(), out int n))
                 {
                     Console.Error.WriteLine("入力値を確認してください。(入力形式：\"2 <= n <= 50\")");
                     return;
